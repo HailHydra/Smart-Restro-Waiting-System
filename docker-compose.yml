@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: smartrestro-postgres
+    environment:
+      POSTGRES_DB: smartrestro
+      POSTGRES_USER: smartrestro
+      POSTGRES_PASSWORD: smartrestro
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+
+  redis:
+    image: redis:7-alpine
+    container_name: smartrestro-redis
+    ports:
+      - "6379:6379"
+
+  ml_engine:
+    build:
+      context: ./ml_engine
+    container_name: smartrestro-ml
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: smartrestro-frontend
+    environment:
+      VITE_API_BASE_URL: http://localhost:8080/api/v1
+    ports:
+      - "4173:4173"
+    depends_on:
+      - backend_node
+
+  backend_node:
+    build:
+      context: ./backend_node
+    container_name: smartrestro-backend-node
+    environment:
+      PORT: "8080"
+      DATABASE_URL: postgres://smartrestro:smartrestro@postgres:5432/smartrestro?sslmode=disable
+      ML_SERVICE_URL: http://ml_engine:8000
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: dev-secret
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+      - ml_engine
+
+volumes:
+  postgres_data:
