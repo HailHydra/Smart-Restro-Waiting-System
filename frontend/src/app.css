@@ -1,44 +1,125 @@
-/* ── SmartRestro Global Design System ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 :root {
-  --bg: #0a0f1e;
-  --bg2: #0e1428;
-  --surface: rgba(255,255,255,0.05);
-  --surface2: rgba(255,255,255,0.09);
-  --border: rgba(255,255,255,0.10);
-  --border2: rgba(255,255,255,0.18);
-  --accent: #6366f1;
-  --accent2: #8b5cf6;
-  --green: #10b981;
-  --orange: #f59e0b;
-  --red: #ef4444;
-  --blue: #3b82f6;
-  --text: #f1f5f9;
-  --text2: #94a3b8;
-  --text3: #64748b;
-  --radius: 16px;
-  --radius2: 24px;
-  --shadow: 0 25px 50px rgba(0,0,0,0.5);
-  --glow: 0 0 40px rgba(99,102,241,0.3);
+  --canvas: #f5f5f5;
+  --panel: #ffffff;
+  --ash: #f0f0f0;
+  --ink: #000000;
+  --yellow: #fff59d;
+  --lavender: #c3b1e1;
+  --mint: #a5d6a7;
+  --gridline: rgba(0, 0, 0, 0.08);
+  --app-background:
+    radial-gradient(circle at top left, rgba(195, 177, 225, 0.24), transparent 30%),
+    radial-gradient(circle at top right, rgba(165, 214, 167, 0.2), transparent 28%),
+    linear-gradient(180deg, #fbfbfe 0%, #f2f6fb 100%);
+  --checker-a: rgba(255, 255, 255, 0.18);
+  --checker-b: rgba(0, 0, 0, 0.035);
+  --theme-toggle-bg: #ffffff;
+  --display: "Arial Black", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --body: "Trebuchet MS", "Segoe UI", sans-serif;
+  --mono: "Courier New", Courier, monospace;
 }
 
-html, body { height: 100%; }
+:root[data-theme="dark"] {
+  --canvas: #0b1020;
+  --panel: #f8fafc;
+  --ash: #dfe7ef;
+  --ink: #050505;
+  --yellow: #fff176;
+  --lavender: #b9a5df;
+  --mint: #9bd7a1;
+  --gridline: rgba(255, 255, 255, 0.1);
+  --app-background:
+    radial-gradient(circle at top left, rgba(255, 245, 157, 0.16), transparent 28%),
+    radial-gradient(circle at top right, rgba(165, 214, 167, 0.14), transparent 30%),
+    linear-gradient(180deg, #10182c 0%, #0b1020 100%);
+  --checker-a: rgba(255, 255, 255, 0.055);
+  --checker-b: rgba(255, 255, 255, 0.025);
+  --theme-toggle-bg: #fff59d;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+html {
+  background: var(--canvas);
+}
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  margin: 0;
+  font-family: var(--body);
+  background: var(--app-background);
+  color: var(--ink);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-#app { height: 100%; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(45deg, var(--checker-a) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--checker-a) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--checker-b) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--checker-b) 75%);
+  background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+  background-size: 24px 24px;
+}
 
-button { cursor: pointer; font-family: inherit; transition: all 0.2s; }
-input, select, textarea { font-family: inherit; }
-a { text-decoration: none; color: inherit; }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 900;
+  text-transform: uppercase;
+}
 
-/* Leaflet map z-index fix */
-.leaflet-pane { z-index: 1; }
-.leaflet-top, .leaflet-bottom { z-index: 2; }
+p {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  border-radius: 0;
+}
+
+input,
+select,
+textarea {
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

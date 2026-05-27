@@ -157,7 +157,9 @@
 </div>
 
 <style>
-.staff-page { min-height:100vh;display:flex;flex-direction:column;background:#0a0f1e; }
+.staff-page { min-height:100vh;display:flex;flex-direction:column;padding-top:64px;background:var(--app-background);position:relative; }
+.staff-page::before { content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(45deg,var(--checker-a) 25%,transparent 25%),linear-gradient(-45deg,var(--checker-a) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--checker-b) 75%),linear-gradient(-45deg,transparent 75%,var(--checker-b) 75%);background-position:0 0,0 12px,12px -12px,-12px 0;background-size:24px 24px; }
+.staff-page > * { position:relative;z-index:1; }
 .topbar { display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;gap:12px; }
 .tl { display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem; }
 .logo { font-size:1.7rem; }

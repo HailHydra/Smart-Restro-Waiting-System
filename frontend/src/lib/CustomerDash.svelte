@@ -284,7 +284,8 @@
 </div>
 
 <style>
-.cust-page { height:100vh;display:flex;flex-direction:column;overflow:hidden; }
+.cust-page { height:100vh;display:flex;flex-direction:column;overflow:hidden;padding-top:64px;background:var(--app-background);position:relative; }
+.cust-page::before { content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(45deg,var(--checker-a) 25%,transparent 25%),linear-gradient(-45deg,var(--checker-a) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--checker-b) 75%),linear-gradient(-45deg,transparent 75%,var(--checker-b) 75%);background-position:0 0,0 12px,12px -12px,-12px 0;background-size:24px 24px; }
 
 .topbar { position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(10,15,30,0.95);border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0; }
 .topbar-left { display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem; }
